@@ -1,5 +1,6 @@
 use solana_sdk::signature::Signature;
 
+#[derive(Debug, Clone)]
 pub struct TxCtx<T> {
     inner: T,
     signatures: Vec<Signature>,
@@ -22,5 +23,9 @@ impl<T> TxCtx<T> {
     pub fn transaction_id(&self) -> &Signature {
         debug_assert!(!self.signatures.is_empty());
         &self.signatures[0]
+    }
+
+    pub fn signatures(&self) -> &Vec<Signature> {
+        &self.signatures
     }
 }
