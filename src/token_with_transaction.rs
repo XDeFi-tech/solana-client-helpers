@@ -182,11 +182,8 @@ impl SplToken for Client {
     ) -> TxClientResult<Pubkey> {
         let mut transaction = Transaction::new_with_payer(
             &[
-                spl_associated_token_account::instruction::create_associated_token_account(
-                    &funder.pubkey(),
-                    recipient,
-                    token_mint,
-                ),
+                #[allow(deprecated)] // FIXME
+                spl_associated_token_account::create_associated_token_account(&funder.pubkey(), recipient, token_mint),
             ],
             Some(&self.payer_pubkey()),
         );
